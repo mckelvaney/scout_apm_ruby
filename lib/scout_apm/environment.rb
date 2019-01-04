@@ -34,6 +34,7 @@ module ScoutApm
     FRAMEWORK_INTEGRATIONS = [
       ScoutApm::FrameworkIntegrations::Rails2.new,
       ScoutApm::FrameworkIntegrations::Rails3Or4.new,
+      ScoutApm::FrameworkIntegrations::Padrino.new,
       ScoutApm::FrameworkIntegrations::Sinatra.new,
       ScoutApm::FrameworkIntegrations::Ruby.new, # Fallback if none match
     ]
@@ -107,6 +108,8 @@ module ScoutApm
         RAILS_ROOT.to_s
       elsif framework == :rails3_or_4
         Rails.root
+      elseif framework == :padrino
+        Padrino.root
       elsif framework == :sinatra
         Sinatra::Application.root || "."
       else
